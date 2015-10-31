@@ -1,4 +1,7 @@
 <?php
+/*
+Install by copying this file to /usr/local/pkg/. It will automatically be picked up by filter reloads.
+*/
 function custom_pf_generate_rules($ruletype) {
     global $config;
 
