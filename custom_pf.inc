@@ -16,6 +16,11 @@ function custom_pf_generate_rules($ruletype) {
         foreach ($config['nat']['rule'] as $rule) {
             if (isset($rule['disabled']))
                 continue;
+                
+            if (strpos($rule['destination']['port'], "-") !== FALSE) {
+                log_error("Skipping NAT rule with a port range");
+                continue;   
+            }
 
             if ($rule['interface'] == 'opt1' && $rule['destination']['network'] == 'opt1ip') {
                 switch($rule['protocol']) {
