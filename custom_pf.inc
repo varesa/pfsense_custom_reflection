@@ -11,7 +11,7 @@ function custom_pf_generate_rules($ruletype) {
     log_error("custom reflections");
     if ($ruletype == "nat") {
         // Open inetd.conf write handle
-        $inetd_fd = fopen("/var/etc/inetd.conf","a");
+        $inetd_fd = fopen("/var/etc/xinetd.conf","a");
 
         foreach ($config['nat']['rule'] as $rule) {
             if (isset($rule['disabled']))
