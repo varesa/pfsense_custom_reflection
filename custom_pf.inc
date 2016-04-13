@@ -90,6 +90,6 @@ function append_inetd($rule, $proto, $proxy_port, $inetd_fd) {
     foreach (explode(" ", trim($target)) as $targip) {
         if (empty($targip))
             continue;
-        fwrite($inetd_fd, "{$proxy_port}\t{$socktype}\t{$proto}\t{$wait}\tnobody\t/usr/bin/nc\tnc {$dash_u}-w {$reflectiontimeout} {$targip} {$rule['local-port']}\n");
+        fwrite($inetd_fd, "service {$proxy_port}-{$proto}\n{\n\ttype = unlisted\n\tbind = 127.0.0.1\n\tport = {$proxy_port}\n\tsocket_type = {$socktype}\n\tprotocol = {$proto}\n\twait = yes\n\tuser = nobody\n\tserver = /usr/bin/nc\n\tserver_args = {$dash_u}-w {$reflectiontimeout} {$targip} {$rule['local-port']}\n}\n\n");
     }
 }
